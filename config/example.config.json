@@ -1,0 +1,14 @@
+{
+    "name": "connectivity-test-qa",
+    "voice_enabled": "true",
+    "state_prompts": {
+        "state_start": "What do you want to do?",
+        "state_text": "Yep, that's how it goes :)",
+        "state_end": "This is the end of the line"
+    },
+    "state_audio": {
+        "state_start": "http://localhost:8001/api/v1/state_start.mp3",
+        "state_text": "http://localhost:8001/api/v1/state_text.mp3",
+        "state_end": "http://localhost:8001/api/v1/state_end.mp3"
+    }
+}
