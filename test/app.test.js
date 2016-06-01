@@ -19,16 +19,15 @@ describe("Testing Infrastructure Stability App", function() {
                     name: 'connectivity-test',
                     testing_today: '2016-05-31 06:07:08.999',
                     voice_enabled: true,  // default
-                    services: {
-                        voice_content: {
-                            api_token: 'test_token_voice',
-                            url: "http://localhost:8001/api/v1/"
-                        }
-                    },
                     state_prompts: {
                         state_start: "What do you want to do?",
                         state_text: "Yep, that's how it goes :)",
                         state_end: "This is the end of the line"
+                    },
+                    state_audio: {
+                        state_start: "http://localhost:8001/api/v1/state_start.mp3",
+                        state_text: "http://localhost:8001/api/v1/state_text.mp3",
+                        state_end: "http://localhost:8001/api/v1/state_end.mp3"
                     }
                 });
         });

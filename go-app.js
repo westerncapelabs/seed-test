@@ -36,7 +36,7 @@ go.app = function() {
         self.make_voice_helper_data = function(name) {
             if (voice_enabled) {
                 return {
-                    speech_url: self.im.config.services.voice_content.url + name + ".mp3",
+                    speech_url: self.im.config.state_audio[name],
                     wait_for: '#',
                 };
             } else {
