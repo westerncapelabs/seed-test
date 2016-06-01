@@ -17,8 +17,6 @@ describe("Testing Infrastructure Stability App", function() {
                 .setup.char_limit(182)
                 .setup.config.app({
                     name: 'connectivity-test',
-                    //country_code: '234',  // nigeria
-                    //channel: '*120*8864*0000#',
                     testing_today: '2016-05-31 06:07:08.999',
                     voice_enabled: true,  // default
                     services: {
@@ -26,6 +24,11 @@ describe("Testing Infrastructure Stability App", function() {
                             api_token: 'test_token_voice',
                             url: "http://localhost:8001/api/v1/"
                         }
+                    },
+                    state_prompts: {
+                        state_start: "What do you want to do?",
+                        state_text: "Yep, that's how it goes :)",
+                        state_end: "This is the end of the line"
                     }
                 });
         });

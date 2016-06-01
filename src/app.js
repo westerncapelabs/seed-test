@@ -28,7 +28,7 @@ go.app = function() {
 
         self.states.add("state_start", function(name) {
             return new ChoiceState(name, {
-                question: $("What do you want to do?"),
+                question: $(self.im.config.state_prompts[name]),
                 helper_metadata: {
                     voice: self.make_voice_helper_data(name)
                 },
@@ -44,7 +44,7 @@ go.app = function() {
 
         self.states.add("state_text", function(name) {
             return new FreeText(name, {
-                question: $("Yep, that's how it goes :)"),
+                question: $(self.im.config.state_prompts[name]),
                 helper_metadata: {
                     voice: self.make_voice_helper_data(name)
                 },
@@ -54,7 +54,7 @@ go.app = function() {
 
         self.states.add("state_end", function(name) {
             return new EndState(name, {
-                text: $("This is the end of the line"),
+                text: $(self.im.config.state_prompts[name]),
                 helper_metadata: {
                     voice: self.make_voice_helper_data(name)
                 },
