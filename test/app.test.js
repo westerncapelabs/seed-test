@@ -47,8 +47,10 @@ describe("Testing Infrastructure Stability App", function() {
                     })
                     .check.reply.properties({
                         helper_metadata: {
-                            speech_url: 'http://localhost:8001/api/v1/state_start.mp3',
-                            wait_for: '#'
+                            voice: {
+                                speech_url: 'http://localhost:8001/api/v1/state_start.mp3',
+                                wait_for: '#'
+                            }
                         }
                     })
                     .run()
@@ -66,8 +68,10 @@ describe("Testing Infrastructure Stability App", function() {
                     })
                     .check.reply.properties({
                         helper_metadata: {
-                            speech_url: 'http://localhost:8001/api/v1/state_text.mp3',
-                            wait_for: '#'
+                            voice: {
+                                speech_url: 'http://localhost:8001/api/v1/state_text.mp3',
+                                wait_for: '#'
+                            }
                         }
                     })
                     .run()
@@ -86,8 +90,10 @@ describe("Testing Infrastructure Stability App", function() {
                     })
                     .check.reply.properties({
                         helper_metadata: {
-                            speech_url: 'http://localhost:8001/api/v1/state_end.mp3',
-                            wait_for: '#'
+                            voice: {
+                                speech_url: 'http://localhost:8001/api/v1/state_end.mp3',
+                                wait_for: '#'
+                            }
                         }
                     })
                     .run()
@@ -105,8 +111,10 @@ describe("Testing Infrastructure Stability App", function() {
                     })
                     .check.reply.properties({
                         helper_metadata: {
-                            speech_url: 'http://localhost:8001/api/v1/state_end.mp3',
-                            wait_for: '#'
+                            voice: {
+                                speech_url: 'http://localhost:8001/api/v1/state_end.mp3',
+                                wait_for: '#'
+                            }
                         }
                     })
                     .run()

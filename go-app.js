@@ -33,46 +33,48 @@ go.app = function() {
             voice_enabled = self.im.config.voice_enabled;
         };
 
-        self.states.add("state_start", function(name, voice_enabled) {
+        self.make_voice_helper_data = function(name) {
+            if (voice_enabled) {
+                return {
+                    speech_url: self.im.config.services.voice_content.url + name + ".mp3",
+                    wait_for: '#',
+                };
+            } else {
+                return {};
+            }
+        };
+
+        self.states.add("state_start", function(name) {
             return new ChoiceState(name, {
                 question: $("What do you want to do?"),
                 helper_metadata: {
-                    speech_url: self.im.config.services.voice_content.url + name + ".mp3",
-                    wait_for: '#',
+                    voice: self.make_voice_helper_data(name)
                 },
                 choices: [
                     new Choice('state_text', $("Continue")),
                     new Choice('state_end', $("Exit"))
                 ],
                 next: function(choice) {
-                    return {
-                        name: choice.value,
-                        creator_opts: voice_enabled
-                    };
+                    return choice.value;
                 }
             });
         });
 
-        self.states.add("state_text", function(name, voice_enabled) {
+        self.states.add("state_text", function(name) {
             return new FreeText(name, {
                 question: $("Yep, that's how it goes :)"),
                 helper_metadata: {
-                    speech_url: self.im.config.services.voice_content.url + name + ".mp3",
-                    wait_for: '#',
+                    voice: self.make_voice_helper_data(name)
                 },
-                next: {
-                    name: "state_end",
-                    creator_opts: voice_enabled
-                }
+                next: "state_end"
             });
         });
 
-        self.states.add("state_end", function(name, voice_enabled) {
+        self.states.add("state_end", function(name) {
             return new EndState(name, {
                 text: $("This is the end of the line"),
                 helper_metadata: {
-                    speech_url: self.im.config.services.voice_content.url + name + ".mp3",
-                    wait_for: '#',
+                    voice: self.make_voice_helper_data(name)
                 },
                 next: "state_start"
             });
