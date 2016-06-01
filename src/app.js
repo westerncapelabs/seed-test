@@ -9,32 +9,53 @@ go.app = function() {
     var GoApp = App.extend(function(self) {
         App.call(self, "state_start");
         var $ = self.$;
+        var voice_enabled;
 
-        self.init = function() {};
+        self.init = function() {
+            voice_enabled = self.im.config.voice_enabled;
+        };
 
-        self.states.add("state_start", function() {
+        self.states.add("state_start", function(name, voice_enabled) {
             return new ChoiceState(name, {
-                question: "What do you want to do?",
+                question: $("What do you want to do?"),
+                helper_metadata: {
+                    speech_url: self.im.config.services.voice_content.url + name + ".mp3",
+                    wait_for: '#',
+                },
                 choices: [
                     new Choice('state_text', $("Continue")),
                     new Choice('state_end', $("Exit"))
                 ],
                 next: function(choice) {
-                    return choice.value;
+                    return {
+                        name: choice.value,
+                        creator_opts: voice_enabled
+                    };
                 }
             });
         });
 
-        self.states.add("state_text", function() {
+        self.states.add("state_text", function(name, voice_enabled) {
             return new FreeText(name, {
-                question: "Yep, that's how it goes :)",
-                next: "state_end"
+                question: $("Yep, that's how it goes :)"),
+                helper_metadata: {
+                    speech_url: self.im.config.services.voice_content.url + name + ".mp3",
+                    wait_for: '#',
+                },
+                next: {
+                    name: "state_end",
+                    creator_opts: voice_enabled
+                }
             });
         });
 
-        self.states.add("state_end", function() {
+        self.states.add("state_end", function(name, voice_enabled) {
             return new EndState(name, {
-                text: "This is the end of the line",
+                text: $("This is the end of the line"),
+                helper_metadata: {
+                    speech_url: self.im.config.services.voice_content.url + name + ".mp3",
+                    wait_for: '#',
+                },
                 next: "state_start"
             });
         });
